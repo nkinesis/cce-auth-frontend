@@ -1,37 +1,37 @@
 <template>
-
-  <section class="login">
-    <form>
-      <div class="innerFrame">
-        <div class="field">
-          <label for="username">Email</label>
-          <input type="text" name="username" id="username" v-model="username">
+  <div>
+    <section class="login">
+      <form>
+        <div class="innerFrame">
+          <div class="field">
+            <label for="username">Email</label>
+            <input type="text" name="username" id="username" v-model="username">
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" v-model="password">
+          </div>
+          <button @click="login" type="button">Submit</button>
         </div>
-        <div class="field">
-          <label for="password">Password</label>
-          <input type="password" name="password" id="password" v-model="password">
-        </div>
-        <button @click="login" type="button">Submit</button>
-      </div>
-    </form>
-  </section>
+      </form>
+    </section>
 
-  <div class="separator"></div>
+    <div class="separator"></div>
 
-  <section class="test">
-    <table>
-      <tr>
-        <td>Is logged in?</td>
-        <td>{{ isLoggedIn }}</td>
-      </tr>
-      <tr>
-        <td>Token UUID</td>
-        <td>{{ token }}</td>
-      </tr>
-    </table>
-    <button @click="check">Update</button>
-  </section>
-
+    <section class="test">
+      <table>
+        <tr>
+          <td>Is logged in?</td>
+          <td>{{ isLoggedIn }}</td>
+        </tr>
+        <tr>
+          <td>Token UUID</td>
+          <td>{{ token }}</td>
+        </tr>
+      </table>
+      <button @click="check">Update</button>
+    </section>
+  </div>
 </template>
 
 <script>
