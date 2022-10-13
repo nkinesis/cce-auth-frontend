@@ -30,6 +30,7 @@
         </tr>
       </table>
       <button @click="check">Update</button>
+      <button @click="getUsers">Get users</button>
     </section>
   </div>
 </template>
@@ -77,13 +78,11 @@ export default {
     check: function() {
       var component = this
       let options = {
-        method: "POST",
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          token: component.token
-        })
+          'Content-Type': 'application/json',
+          'Authorization': component.token
+        }
       }
       fetch('/api/login/check', options)
         .then((response) => { 
@@ -91,6 +90,26 @@ export default {
         })
         .then((data) => { 
           component.isLoggedIn = data.isLoggedIn
+        })
+    },
+    getUsers: function() {
+      var component = this
+      let options = {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+         
+        }
+      }
+      fetch('/api/users', options)
+        .then((response) => { 
+          return response.json() 
+        })
+        .then((data) => { 
+          console.log(data)
+        })
+        .catch((error) => { 
+          console.log(error)
         })
     }
   }
