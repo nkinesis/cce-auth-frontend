@@ -30,7 +30,8 @@
         </tr>
       </table>
       <button @click="check">Update</button>
-      <button @click="getUsers">Get users</button>
+      <button @click="getUsersCorrect">Get users (correct)</button>
+      <button @click="getUsersWrong">Get users (wrong)</button>
     </section>
   </div>
 </template>
@@ -63,19 +64,19 @@ export default {
         })
       }
       fetch('/api/login', options)
-        .then((response) => { 
-          return response.json() 
+        .then((response) => {
+          return response.json()
         })
-        .then((data) => { 
+        .then((data) => {
           component.isLoggedIn = true
           component.token = data.token
         })
-        .catch((error) => { 
+        .catch((error) => {
           console.log(error)
           component.isLoggedIn = false
         })
     },
-    check: function() {
+    check: function () {
       var component = this
       let options = {
         method: "GET",
@@ -85,33 +86,53 @@ export default {
         }
       }
       fetch('/api/login/check', options)
-        .then((response) => { 
-          return response.json() 
+        .then((response) => {
+          return response.json()
         })
-        .then((data) => { 
+        .then((data) => {
           component.isLoggedIn = data.isLoggedIn
         })
     },
-    getUsers: function() {
+    getUsersCorrect: function () {
       var component = this
       let options = {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
-         
+          'Authorization': component.token
         }
       }
       fetch('/api/users', options)
-        .then((response) => { 
-          return response.json() 
+        .then((response) => {
+          return response.json()
         })
-        .then((data) => { 
+        .then((data) => {
           console.log(data)
         })
-        .catch((error) => { 
+        .catch((error) => {
           console.log(error)
         })
+    },
+    getUsersWrong: function () {
+    var component = this
+    let options = {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '123test123'
+      }
     }
+    fetch('/api/users', options)
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
   }
 }
 </script>
